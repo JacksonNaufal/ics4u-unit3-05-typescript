@@ -13,105 +13,117 @@ const MAGIC_NUM = 15
 const POSSIBLE_NUM = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 /**
- * program checks for duplicates
+ * program checks for dups
  *
- * @param {number[]} arrOne - array to be checked.
- * @returns {boolean} T/F for if sqrArray has duplicates or not.
+ * @param {number[]} arrOne - array 
+ * @returns {boolean} checks for dups.
  */
-function hasDuplicates(arrOne: number[]): boolean {
+function dup(arrOne: number[]): boolean {
   const sortedArrOne = arrOne.slice().sort(function (a, b) {
     return a - b
   })
 
+  // results array
   const results = []
-  for (let count = 0; count < sortedArrOne.length - 1; count++) {
-    if (sorteArrOne[count + 1] === sortedArrOne[count]) {
-      results.push(sortedArrOne[count])
+  
+  // loops through, checks for length, and sorts array
+  for (let counter = 0; counter < sortedArrOne.length - 1; counter++) {
+    if (sortedArrOne[counter + 1] === sortedArrOne[counter]) {
+      results.push(sortedArrOne[counter])
     }
   }
+
+  // returns the length
   return results.length !== 0
 }
 
 /**
- * Check if Square is Magic.
+ * Checks for magic square.
  *
- * @param {number[]} sqrArray - array to be checked.
- * @returns {boolean} T/F for if sqrArray is magic or not.
+ * @param {number[]} arrOne - array.
+ * @returns {boolean} checks for magic.
  */
-function isMagic(arrOne: number[]): boolean {
-  if (hasDuplicates(arrOne)) {
+function magicSquare(arrOne: number[]): boolean {
+
+  // if it has duplicates, it kills it on sight
+  if (dup(arrOne)) {
     return false
   } else {
-    // define rows
-    const row1 = arrOne[0] + arrOne[1] + arrOne[2]
-    const row2 = arrOne[3] + arrOne[4] + arrOne[5]
-    const row3 = arrOne[6] + arrOne[7] + arrOne[8]
-    // define columns
-    const col1 = sqrArray[0] + arrOne[3] + arrOne[6]
-    const col2 = sqrArray[1] + arrOne[4] + arrOne[7]
-    const col3 = sqrArray[2] + arrOne[5] + arrOne[8]
-    // define diagonals
-    const diag1 = sqrArray[0] + sqrArray[4] + sqrArray[8]
-    const diag2 = sqrArray[2] + sqrArray[4] + sqrArray[6]
+    // creats each row in the square
+    const rowOne = arrOne[0] + arrOne[1] + arrOne[2]
+    const rowTwo = arrOne[3] + arrOne[4] + arrOne[5]
+    const rowThree = arrOne[6] + arrOne[7] + arrOne[8]
+    // creates each column in the square
+    const columnOne = arrOne[0] + arrOne[3] + arrOne[6]
+    const columnTwo = arrOne[1] + arrOne[4] + arrOne[7]
+    const columnThree = arrOne[2] + arrOne[5] + arrOne[8]
+    // creates each diaganol in the square
+    const diagonalOne = arrOne[0] + arrOne[4] + arrOne[8]
+    const diagonalTwo = arrOne[2] + arrOne[4] + arrOne[6]
 
+    // returns the rows, colums, abd the diagonals in the square
     return (
-      row1 === row2 &&
-      row2 === row3 &&
-      row3 === col1 &&
-      col1 === col2 &&
-      col2 === col3 &&
-      col3 === diag1 &&
-      diag1 === diag2 &&
-      diag2 === MAGIC_NUM
+      rowOne === rowTwo &&
+      rowTwo === rowThree &&
+      rowThree === columnOne &&
+      columnOne === columnTwo &&
+      columnTwo === columnThree &&
+      columnThree === diagonalOne &&
+      diagonalOne === diagonalTwo &&
+      diagonalTwo === MAGIC_NUM
     )
   }
 }
 
 /**
- * Magic Square Printing Function.
+ * Where the magic square is printed.
  *
- * @param {number[]} arr - array to be printed.
+ * @param {number[]} baseArray printed array.
  */
-function printSquare(arr: number[]): void {
+function printSquare(baseArray: number[]): void {
   console.log(
-    `${arr[0]}` +
+    `${baseArray[0]}` +
       ' ' +
-      `${arr[1]}` +
+      `${baseArray[1]}` +
       ' ' +
-      `${arr[2]}` +
+      `${baseArray[2]}` +
       '\n' +
-      `${arr[3]}` +
+      `${baseArray[3]}` +
       ' ' +
-      `${arr[4]}` +
+      `${baseArray[4]}` +
       ' ' +
-      `${arr[5]}` +
+      `${baseArray[5]}` +
       '\n' +
-      `${arr[6]}` +
+      `${baseArray[6]}` +
       ' ' +
-      `${arr[7]}` +
+      `${baseArray[7]}` +
       ' ' +
-      `${arr[8]}` +
+      `${baseArray[8]}` +
       '\n'
   )
 }
 
 /**
- * Generates Magic Squares.
+ * Generates the magic squares.
  *
- * @param {number[]} pNum - possible numbers to be added to a magic square.
- * @param {number[]} sqrArray - array to be filled with pNum.
- * @param {number} index - current index of sqrArray to add pNum to.
+ * @param {number[]} num possible numbers.
+ * @param {number[]} arrOne - array.
+ * @param {number} index - current index.
  */
-function generateSquare(pNum: number[], arrOne: number[], index: number): void {
+function generateSquare(
+  num: number[],
+  arrOne: number[],
+  index: number
+): void {
   // prints valid magic squares
-  if (index === 9 && isMagic(arrOne)) {
-    printSquare(sqrArray)
+  if (index === 9 && magicSquare(arrOne)) {
+    printSquare(arrOne)
   } else {
     // run through each number for each index
     if (index !== 9) {
-      for (let count = 0; count < 9; count++) {
-        sqrArray[index] = pNum[count]
-        generateSquare(pNum, sqrArray, index + 1)
+      for (let counter = 0; counter < 9; counter++) {
+        arrOne[index] = num[counter]
+        generateSquare(num, arrOne, index + 1)
       }
     }
   }
@@ -119,7 +131,12 @@ function generateSquare(pNum: number[], arrOne: number[], index: number): void {
 
 const arrOne: number[] = []
 
-console.log('All Possible Magic Squares (3x3):\n')
-generateSquare(POSSIBLE_NUM, sqrArray, 0)
+// starting of the program
+console.log('All Possible Magic Squares (3x3):')
+console.log('')
 
+// square generation
+generateSquare(POSSIBLE_NUM, arrOne, 0)
+
+// end of program
 console.log('Done.')
