@@ -15,7 +15,7 @@ const POSSIBLE_NUM = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 /**
  * program checks for dups
  *
- * @param {number[]} arrOne - array 
+ * @param {number[]} arrOne - array
  * @returns {boolean} checks for dups.
  */
 function dup(arrOne: number[]): boolean {
@@ -25,7 +25,7 @@ function dup(arrOne: number[]): boolean {
 
   // results array
   const results = []
-  
+
   // loops through, checks for length, and sorts array
   for (let counter = 0; counter < sortedArrOne.length - 1; counter++) {
     if (sortedArrOne[counter + 1] === sortedArrOne[counter]) {
@@ -44,7 +44,6 @@ function dup(arrOne: number[]): boolean {
  * @returns {boolean} checks for magic.
  */
 function magicSquare(arrOne: number[]): boolean {
-
   // if it has duplicates, it kills it on sight
   if (dup(arrOne)) {
     return false
@@ -110,11 +109,7 @@ function printSquare(baseArray: number[]): void {
  * @param {number[]} arrOne - array.
  * @param {number} index - current index.
  */
-function generateSquare(
-  num: number[],
-  arrOne: number[],
-  index: number
-): void {
+function generateSquare(num: number[], arrOne: number[], index: number): void {
   // prints valid magic squares
   if (index === 9 && magicSquare(arrOne)) {
     printSquare(arrOne)
