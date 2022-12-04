@@ -102,11 +102,7 @@ function printSquare(arr: number[]): void {
  * @param {number[]} sqrArray - array to be filled with pNum.
  * @param {number} index - current index of sqrArray to add pNum to.
  */
-function generateSquare(
-  pNum: number[],
-  arrOne: number[],
-  index: number
-): void {
+function generateSquare(pNum: number[], arrOne: number[], index: number): void {
   // prints valid magic squares
   if (index === 9 && isMagic(arrOne)) {
     printSquare(sqrArray)
